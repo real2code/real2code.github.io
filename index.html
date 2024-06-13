@@ -63,7 +63,7 @@
                     Method
                 </h2>
 
-                <img src="real2code-method.png" style="width: 100%; margin-top: 1em; margin-bottom: 1em;">
+                <img src="real2code-method.jpg" style="width: 100%; margin-top: 1em; margin-bottom: 1em;">
                 <p style="text-align: justify; color:#2d2e2e; font-size: 100%; font-family: 'Avenir', Avenir; line-height: 150%;">
                     Given unstructured multi-view RGB images, we leverage the pre-trained <a href="https://arxiv.org/abs/2312.14132">DUSt3R</a> model to obtain dense 2D-to-3D pointmaps, and use a fine-tuned 2D segmentation model <a href="https://arxiv.org/abs/2304.02643">SAM</a> to perform part-level segmentation and project to segmented 3D point clouds. 
                     A learned shape-completion model takes partial point cloud inputs and predicts a dense occupancy field, which is used for part-level mesh extraction. We fine-tune a large language model (LLM)  <a href="https://arxiv.org/abs/2308.12950">CodeLlama</a> that takes mesh information in the form of oriented bounding boxes, and outputs full code descriptions of the object that can directly be executed in simulation.
