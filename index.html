@@ -33,28 +33,109 @@
                     <a href="https://shurans.github.io/">Shuran Song </a> <sup>1,2</sup>
 				</h3>
                 <h3 style="text-align: center;font-size: 100%; color: #2d2e2e"><p><sup>1</sup> Stanford University &nbsp <sup>2</sup> Columbia University</p></h3> 
-						
-                <!-- <h3 style="text-align: center;">
-                    <a href="https://arxiv.org/abs/2307.04738">Arxiv</a> | 
-                    &nbsp <a href="https://github.com/MandiZhao/real2code">Code</a>
-                </p> --> 
+                <h3 style="text-align: center;">
+                    <a href="https://arxiv.org/abs/2406.08474">Arxiv</a> | 
+                    &nbsp <a href="https://github.com/MandiZhao/real2code">Code</a> |
+                    &nbsp <a href="https://github.com/MandiZhao/real2code">Data</a>
+                </p> 
             </section>
 
-            <section id="four">
-                <h2 style="text-align: center; color: #820000; font-size: 150%; margin-bottom: 0.1em; font-weight: 500; line-height: 80%;">
+            <section>
+                <!-- <h2 style="text-align: center; color: #820000; font-size: 150%; margin-bottom: 0.3em; font-weight: 500; line-height: 80%;">
                     Abstract
-                </h2>
+                </h2> -->
+                <span class="image fit" style="max-width: 100%; margin-top: 0.1em; margin-bottom: 1.5em; margin-left: auto; margin-right: auto">
+                    <!-- <img src="images/teaser.jpg" alt="" /> -->
+                    <video controls autoplay muted playsinline style="width: 100%;">
+                        <source src="real2code-website-video.mp4" > </video>
+                </span>
                 <p style="text-align: justify; color:#2d2e2e; font-size: 100%; font-family: 'Avenir', Avenir; line-height: 150%;">
-                    We propose Real2Code, a novel method for reconstructing articulated objects via code generation, leveraging pre-trained large language models (LLMs). 
-                    Real2Code takes visual observations as input, and performs both part-level geometry reconstruction and joint prediction. 
-                    We evaluate our method on an extensive set of objects with varying level of kinematic complexity. Whereas prior methods fail at objects with more than three articulated parts, Real2Code reliably reconstructs articulated objects with up to 10 parts. 
+                    We present Real2Code, a novel approach to reconstructing articulated objects via code generation. Given visual observations of an object, we first reconstruct its part geometry using an image segmentation model and a shape completion model. We then represent the object parts with oriented bounding boxes, which are input to a fine-tuned large language model (LLM) to predict joint articulation as code. By leveraging pre-trained vision and language models, our approach scales elegantly with the number of articulated parts, and generalizes from synthetic training data to real world objects in unstructured environments. 
+                    Experimental results demonstrate that Real2Code significantly outperforms previous state-of-the-art in reconstruction accuracy, and is the first approach to extrapolate beyond objects' structural complexity in the training set, and reconstructs objects with up to 10 articulated parts. When incorporated with a stereo reconstruction model, Real2Code also generalizes to real world objects from a handful of multi-view RGB images, without the need for depth or camera information. 
+                </p>
+                
+                
+
+            </section>
+            
+            <section>
+                <h2 style="text-align: center; color: #820000; font-size: 150%; margin-bottom: 0.3em; font-weight: 500; line-height: 80%;">
+                    Method
+                </h2>
+
+                <img src="real2code-method.png" style="width: 100%; margin-top: 1em; margin-bottom: 1em;">
+                <p style="text-align: justify; color:#2d2e2e; font-size: 100%; font-family: 'Avenir', Avenir; line-height: 150%;">
+                    Given unstructured multi-view RGB images, we leverage the pre-trained <a href="https://arxiv.org/abs/2312.14132">DUSt3R</a> model to obtain dense 2D-to-3D pointmaps, and use a fine-tuned 2D segmentation model <a href="https://arxiv.org/abs/2304.02643">SAM</a> to perform part-level segmentation and project to segmented 3D point clouds. 
+                    A learned shape-completion model takes partial point cloud inputs and predicts a dense occupancy field, which is used for part-level mesh extraction. We fine-tune a large language model (LLM)  <a href="https://arxiv.org/abs/2308.12950">CodeLlama</a> that takes mesh information in the form of oriented bounding boxes, and outputs full code descriptions of the object that can directly be executed in simulation.
                 </p>
             </section>
 
-            <section id="four">
-                <!-- include workshop-poster.jpg, display at page width -->
-                <img src="workshop-poster.jpg" style="width: 100%; margin-top: 1em; margin-bottom: 1em;">
+
+            <section>
+                <h2 style="text-align: center; color: #820000; font-size: 150%; margin-bottom: 0.3em; font-weight: 500; line-height: 80%;">
+                    Qualitative Results
+                </h2>
+
+                <img src="real2code-qual-result.jpg" style="width: 100%; margin-top: 1em; margin-bottom: 1em;">
+                <p style="text-align: justify; color:#2d2e2e; font-size: 100%; font-family: 'Avenir', Avenir; line-height: 150%;">
+                    We evaluate on objects with a range of varying kinematic complexities, from a two-part laptop to a ten-part multidrawer table. Whereas all methods can handle the simpler laptop articulation, baseline methods struggle as the number of object parts increases, and Real2Code performs reconstruction much more accurately. PARIS runs out of memory and fails to run on the ten-part table (N/A).
+                </p>
+
+                <img src="real2code-realobj.jpg" style="width: 100%; margin-top: 1em; margin-bottom: 1em;">
+                <p style="text-align: justify; color:#2d2e2e; font-size: 100%; font-family: 'Avenir', Avenir; line-height: 150%;">
+                    We evaluate Real2Code on real world objects using RGB data. For each object, we use 10 pose-free RGB images captured in-the-wild and run Real2Code with DUSt3R[8]. We show one example RGB input (1st row), segmented point clouds (2nd row) and full reconstruction (3rd row) for each object.
+                </p>
             </section>
+
+ 
+
+            <section>
+                <h2 style="text-align: center; color: #820000; font-size: 150%; margin-bottom: 0.3em; font-weight: 500; line-height: 80%;">
+                    Acknowledgements
+                </h2>
+                <p style="text-align: justify; color:#2d2e2e; font-size: 100%; font-family: 'Avenir', Avenir; line-height: 150%;">
+                    This work was supported in part by the Toyota Research Institute, NSF Award \#2143601, Sloan Fellowship.  The views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the official policies, either expressed or implied, of the sponsors.
+
+                    The authors would like to thank Zhenjia Xu for the real world data collection, Samir Gadre for helpful pointers on LLM fine-tuning, Cheng Chi for help with training our shape completion model training, and all members of REALab: Zeyi Liu, Xiaomeng Xu, Chuer Pan, Huy Ha, Yihuai Gao, Mengda Xu, Austin Patel, et. al. for valuable feedback and discussion on the paper manuscript. 
+                    We also thank administrator of Stanford EE department, namely Kenny Green, Steve B. Cousins and Mary K. McMahon for their support during real world data collection.
+                
+                </p>
+            </section>
+
+            <!-- <section>
+                <h3 style="text-align: left; color: #820000; font-size: 120%; margin-bottom: 0.2em; font-weight: 500; line-height: 140%;">
+                    Q&A
+                </h3>
+                <div class="block">
+                    <h3 class="title is-6" style="font-size: 100%; color: #175E54; font-weight: 800; margin-bottom: 0.2em" >
+                      Why does the mesh reconstruction look less smooth than <a href="https://arxiv.org/abs/2308.07391">PARIS</a>?
+                    </h3>
+                    <div class="content">
+                      <p style="font-size: 100%; line-height: 150%">
+                        PARIS assumes an abundant number of RGB images (around 100 images per object) that cover a full 360-degree view of the object, and uses NeRF-style learned neural rendering to extract the part meshes. 
+                        The advantage of their approach is that the mesh surface extracted from the learned neural field is smoothe, but it also requires much longer test-time optimization procedure for every new object,
+                        and still does not complete the missing shape in the occluded areas of the object (e.g. inside of a drawer). In addition, Real2Code requires much fewer images (around 10 RGBs) from partial observation view, 
+                        since this setup is more practical for collecting real world object data.
+                      </p>
+                    </div> 
+                  </div>
+
+                  <div class="block">
+                    <h3 class="title is-6" style="font-size: 100%; color: #175E54; font-weight: 800; margin-bottom: 0.2em" >
+                      Does your method handle my new object category X?
+                    </h3>
+                    <div class="content">
+                      <p style="font-size: 100%; line-height: 150%">
+                       Although our paper presents results on laptops and furniture-like objects, our method can in principle handle any object categories. 
+                       The main bottleneck right now is the lack of training data: both our part segmentation and fine-tuning LLM modules require data with both part-level mesh and articulation joint annotations, which we have
+                       not found a bigger/better alternative than PartNet-Mobility.
+                      </p>
+                    </div> 
+                  </div>
+            </section> -->
+            
+
+            
         </div>
         <!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
