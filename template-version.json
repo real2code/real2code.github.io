@@ -1,0 +1,17 @@
+{
+  "formatVersion": 1,
+  "name": "project-website-template",
+  "version": "1.2.0",
+  "contentSchemaVersion": 1,
+  "templateDigest": "f87584c510f969fddd3b7108c1b6f5fa2954fb95955da88df27cc40aad0db209",
+  "sourceRevision": "429b5572f9274865009c4ced99c3022b38fc3b03",
+  "files": {
+    "index.html": "ca59318c596ce2b7352a9e6f947f12405e1fc656716dc9ef392b6babc078d532",
+    "styles.css": "d6b1f4fe4637ea8f368521bf4b18baf427df182298eba98b11971c2d31902037",
+    "render-content.js": "a2aac80669cae4a1ba14edcd79934cbb462e330741f539c2879e373d00167a89",
+    "project.js": "f0e3372ded86a84a8171f9c923b5991c73b56480f1cc804ca1675bc6fde8f50c",
+    "build-index.mjs": "cfc48d75700e5d5cde2c2ee3bd8d3a4a35e3b44460c36981179485470cf6e38c",
+    "assets/fonts/InterVariable.woff2": "693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3",
+    "assets/fonts/OFL.txt": "5cfd4b1a4302f0828b4d2756b7927f37008767a0f1ec2c30f1238cbc9c43fdea"
+  }
+}
